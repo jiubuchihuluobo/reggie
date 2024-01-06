@@ -1,4 +1,4 @@
-package com.surge.response;
+package com.surge.common;
 
 import lombok.Data;
 
