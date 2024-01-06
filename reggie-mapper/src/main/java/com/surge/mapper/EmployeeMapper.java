@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface EmployeeMapper {
 
-    Employee findEmployeeByUserName(String username);
+    Employee findByUserName(String username);
 
 }
