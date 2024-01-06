@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.surge</groupId>
-            <artifactId>reggie-mapper</artifactId>
+            <artifactId>reggie-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
