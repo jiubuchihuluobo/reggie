@@ -5,20 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
 import java.util.Map;
 
-public class ProjectUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class EmployeeUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    public ProjectUsernamePasswordAuthenticationFilter(String defaultFilterProcessesUrl) {
-        super(new AntPathRequestMatcher(defaultFilterProcessesUrl, "POST"));
+    public EmployeeUsernamePasswordAuthenticationFilter(String defaultFilterProcessesUrl) {
+        super(defaultFilterProcessesUrl);
     }
 
     @Override
@@ -35,18 +33,12 @@ public class ProjectUsernamePasswordAuthenticationFilter extends AbstractAuthent
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
-    public void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
+    private void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
         authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
     }
 
-    @Override
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
-        super.setAuthenticationManager(authenticationManager);
-    }
-
     public Map<String, Object> getRequestJson(HttpServletRequest request) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(request.getInputStream(), new TypeReference<>() {
+        return new ObjectMapper().readValue(request.getInputStream(), new TypeReference<>() {
         });
     }
 
