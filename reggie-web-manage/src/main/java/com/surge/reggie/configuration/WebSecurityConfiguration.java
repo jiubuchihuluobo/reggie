@@ -13,7 +13,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 @Configuration
 @EnableWebSecurity
@@ -35,24 +34,22 @@ public class WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, EmployeeUsernamePasswordAuthenticationFilter employeeUsernamePasswordAuthenticationFilter) throws Exception {
-        SessionAuthenticationStrategy sessionAuthenticationStrategy = httpSecurity.getSharedObject(SessionAuthenticationStrategy.class);
         httpSecurity
-//                .anonymous(httpSecurityAnonymousConfigurer ->
-//                        httpSecurityAnonymousConfigurer
-//                                .disable()
-//
-//                )
+                .anonymous(httpSecurityAnonymousConfigurer ->
+                        httpSecurityAnonymousConfigurer
+                                .disable()
+                )
                 .csrf(httpSecurityCsrfConfigurer ->
                         httpSecurityCsrfConfigurer
                                 .disable()
                 )
                 .headers(httpSecurityHeadersConfigurer ->
                         httpSecurityHeadersConfigurer
-                                .frameOptions().disable()
+                                .disable()
                 )
                 .addFilterBefore(employeeUsernamePasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(Customizer.withDefaults())
-//                .rememberMe(Customizer.withDefaults())
+                .rememberMe(Customizer.withDefaults())
 //                .httpBasic(Customizer.withDefaults())
 //                .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
