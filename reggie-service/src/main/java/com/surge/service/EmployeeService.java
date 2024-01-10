@@ -1,9 +1,9 @@
 package com.surge.service;
 
-import com.surge.common.Response;
+import org.springframework.security.core.Authentication;
 
 public interface EmployeeService {
 
-    Response<Object> login(String username, String password);
+    Authentication login(String username, String password);
 
 }
