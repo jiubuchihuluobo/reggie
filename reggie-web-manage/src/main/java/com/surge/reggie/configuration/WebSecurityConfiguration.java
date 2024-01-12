@@ -59,7 +59,7 @@ public class WebSecurityConfiguration {
                                 .requestMatchers("/static/**").permitAll()
                                 .requestMatchers("/error/**").permitAll()
                                 .requestMatchers("/employee/login").permitAll()
-                                .anyRequest().permitAll()
+                                .anyRequest().authenticated()
                 );
         return httpSecurity.build();
     }
