@@ -2,6 +2,7 @@ package com.surge.reggie.controller;
 
 import com.surge.common.Constant;
 import com.surge.common.Response;
+import com.surge.reggie.domain.Employee;
 import com.surge.service.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,8 +50,25 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public Response<Object> findAll() {
-        return Response.success(employeeService.findAll());
+    public Response<Object> find(@RequestParam(name = "name", required = false) String name) {
+        return Response.success(employeeService.find(name));
+    }
+
+    @GetMapping("/{id}")
+    public Response<Object> findById(@PathVariable Long id) {
+        return Response.success(employeeService.findById(id));
+    }
+
+    @PostMapping
+    public Response<Object> save(@RequestBody Employee employee) {
+        Employee createUser = employeeService.getCurrentUser();
+        return Response.success(employeeService.save(employee, createUser));
+    }
+
+    @PutMapping
+    public Response<Object> update(@RequestBody Employee employee) {
+        Employee createUser = employeeService.getCurrentUser();
+        return Response.success(employeeService.save(employee, createUser));
     }
 
 }

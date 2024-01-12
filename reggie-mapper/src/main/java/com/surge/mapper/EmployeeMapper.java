@@ -10,6 +10,12 @@ public interface EmployeeMapper {
 
     Employee findByUserName(String username);
 
-    List<Employee> findAll();
+    List<Employee> find(String username);
+
+    Employee findById(Long id);
+
+    Long insert(Employee employee);
+
+    Long update(Employee employee);
 
 }
