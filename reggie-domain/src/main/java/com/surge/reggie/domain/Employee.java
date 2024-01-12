@@ -47,7 +47,7 @@ public class Employee implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return status == 1;
     }
 
     @Override
