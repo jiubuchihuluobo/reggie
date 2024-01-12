@@ -178,3 +178,5 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
+PingFangSC-Medium.ttf
+PingFangSC-Regular.ttf
