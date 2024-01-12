@@ -60,8 +60,8 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry
                                 .requestMatchers("/static/**").permitAll()
-                                .requestMatchers("/error/**").permitAll()
                                 .requestMatchers("/employee/login").permitAll()
+                                .requestMatchers("/employee/logout").permitAll()
                                 .anyRequest().authenticated()
                 );
         return httpSecurity.build();

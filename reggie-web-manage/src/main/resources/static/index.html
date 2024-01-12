@@ -183,7 +183,7 @@
                 logoutApi().then((res) => {
                     if (res.code === 1) {
                         localStorage.removeItem('userInfo');//清理本地存储的用户信息
-                        window.location.href = '/page/login/login.html'//跳转登录页面
+                        window.location.href = '/static/page/login/login.html'//跳转登录页面
                     }
                 })
             },
