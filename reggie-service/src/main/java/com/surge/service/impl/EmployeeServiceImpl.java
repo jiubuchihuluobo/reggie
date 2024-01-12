@@ -1,6 +1,7 @@
 package com.surge.service.impl;
 
 import com.surge.common.Constant;
+import com.surge.common.SnowFlakeUtil;
 import com.surge.mapper.EmployeeMapper;
 import com.surge.reggie.domain.Employee;
 import com.surge.service.EmployeeService;
@@ -53,6 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee save(Employee employee, Employee createUser) {
         if (employee.getId() == null) {
+            employee.setId(SnowFlakeUtil.getId());
             employee.setCreateUser(createUser.getId());
             employee.setUpdateUser(createUser.getId());
             employee.setCreateTime(new Date());

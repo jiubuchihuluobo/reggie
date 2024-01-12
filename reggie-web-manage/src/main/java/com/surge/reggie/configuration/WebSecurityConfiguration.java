@@ -50,7 +50,10 @@ public class WebSecurityConfiguration {
                                 .disable()
                 )
 //                .addFilterBefore(employeeUsernamePasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(Customizer.withDefaults())
+                .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer
+                                .maximumSessions(1)
+                )
                 .rememberMe(Customizer.withDefaults())
 //                .httpBasic(Customizer.withDefaults())
 //                .formLogin(Customizer.withDefaults())
