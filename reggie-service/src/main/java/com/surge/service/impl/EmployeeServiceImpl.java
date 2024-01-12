@@ -1,6 +1,7 @@
 package com.surge.service.impl;
 
 import com.surge.mapper.EmployeeMapper;
+import com.surge.reggie.domain.Employee;
 import com.surge.service.EmployeeService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -32,6 +35,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (AuthenticationException e) {
             return usernamePasswordAuthenticationToken;
         }
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeMapper.findAll();
     }
 
 }

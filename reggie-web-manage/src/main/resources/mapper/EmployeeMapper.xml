@@ -16,4 +16,9 @@
         FROM employee
         WHERE username = #{username}
     </select>
+
+    <select id="findAll" parameterType="Employee">
+        SELECT *
+        FROM employee
+    </select>
 </mapper>
