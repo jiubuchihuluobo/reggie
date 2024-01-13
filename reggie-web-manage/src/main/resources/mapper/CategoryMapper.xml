@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.mapper.CategoryMapper">
+    <select id="findAll" parameterType="Category">
+        SELECT *
+        FROM category
+    </select>
+
+    <insert id="insert" parameterType="Category">
+        INSERT INTO category(id, type, name, sort, create_time, update_time, create_user, update_user)
+        VALUES (#{id}, #{type}, #{name}, #{sort}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+
+    <select id="findById" parameterType="Category">
+        SELECT *
+        FROM category
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        UPDATE category
+        <set>
+            <if test="name != '' and name != null">
+                name = #{name},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM employee
+        WHERE id = #{id}
+    </delete>
+</mapper>

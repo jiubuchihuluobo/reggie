@@ -25,7 +25,7 @@ public class Employee implements UserDetails {
 
     private String idNumber;
 
-    private Integer status;
+    private int status;
 
     private Date createTime;
 
