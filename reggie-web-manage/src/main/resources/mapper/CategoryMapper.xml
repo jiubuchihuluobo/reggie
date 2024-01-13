@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.surge.mapper.CategoryMapper">
-    <select id="findAll" parameterType="Category">
+    <select id="findAll" resultType="Category">
         SELECT *
         FROM category
     </select>
@@ -13,7 +13,7 @@
         VALUES (#{id}, #{type}, #{name}, #{sort}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
 
-    <select id="findById" parameterType="Category">
+    <select id="findById" resultType="Category">
         SELECT *
         FROM category
         <where>
@@ -23,7 +23,7 @@
         </where>
     </select>
 
-    <update id="update">
+    <update id="update" parameterType="Category">
         UPDATE category
         <set>
             <if test="name != '' and name != null">

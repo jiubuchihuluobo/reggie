@@ -23,6 +23,7 @@
         <spring-boot.version>3.0.2</spring-boot.version>
         <mybatis.version>3.0.2</mybatis.version>
         <hutool.version>5.8.25</hutool.version>
+        <pagehelper.version>2.1.0</pagehelper.version>
     </properties>
     <dependencies>
         <dependency>
@@ -69,6 +70,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

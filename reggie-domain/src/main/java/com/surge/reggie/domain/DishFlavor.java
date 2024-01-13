@@ -6,15 +6,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Category implements Serializable {
+public class DishFlavor implements Serializable {
 
     private Long id;
 
-    private int type;
+    private Long dishId;
 
     private String name;
 
-    private int sort;
+    private String value;
 
     private Date createTime;
 
@@ -23,5 +23,7 @@ public class Category implements Serializable {
     private Long createUser;
 
     private Long updateUser;
+
+    private Integer isDeleted;
 
 }

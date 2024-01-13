@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.mapper.DishMapper">
+    <resultMap id="DishWithCategoryAndFlavorMap" type="DishWithCategoryAndFlavorVo">
+        <id property="id" column="dish_id"/>
+        <result property="name" column="dish_name"/>
+        <result property="price" column="dish_price"/>
+        <result property="image" column="dish_image"/>
+        <result property="description" column="dish_description"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="flavors" ofType="DishFlavorVo">
+            <id property="id" column="flavor_id"/>
+            <result property="name" column="flavor_name"/>
+            <result property="value" column="flavor_value"/>
+        </collection>
+    </resultMap>
+
+    <select id="find" resultType="DishWithCategoryVo">
+        SELECT dish.id,
+               dish.name,
+               dish.price,
+               dish.code,
+               dish.image,
+               dish.description,
+               dish.status,
+               dish.sort,
+               dish.create_time,
+               dish.update_time,
+               dish.create_user,
+               dish.update_user,
+               dish.is_deleted,
+               category.name AS category_name
+        FROM dish
+                 INNER JOIN category ON dish.category_id = category.id
+        <where>
+            <if test="name != '' and name != null">
+                AND dish.name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" resultMap="DishWithCategoryAndFlavorMap">
+        SELECT dish.id           AS dish_id,
+               dish.name         AS dish_name,
+               dish.price        AS dish_price,
+               dish.image        AS dish_image,
+               dish.description  AS dish_description,
+               category.name     AS category_name,
+               dish_flavor.id    AS flavor_id,
+               dish_flavor.name  AS flavor_name,
+               dish_flavor.value AS flavor_value
+        FROM dish
+                 INNER JOIN category ON dish.category_id = category.id
+                 INNER JOIN dish_flavor ON dish.id = dish_flavor.dish_id
+        <where>
+            <if test="id != null">
+                AND dish.id = #{id}
+            </if>
+        </where>
+    </select>
+</mapper>

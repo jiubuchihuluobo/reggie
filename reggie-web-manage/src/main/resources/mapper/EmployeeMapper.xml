@@ -8,7 +8,7 @@
         VALUES (#{id}, #{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
 
-    <select id="findByUserName" parameterType="Employee">
+    <select id="findByUserName" resultType="Employee">
         SELECT *
         FROM employee
         <where>
@@ -18,7 +18,7 @@
         </where>
     </select>
 
-    <select id="find" parameterType="Employee">
+    <select id="find" resultType="Employee">
         SELECT *
         FROM employee
         <where>
@@ -28,7 +28,7 @@
         </where>
     </select>
 
-    <select id="findById" parameterType="Employee">
+    <select id="findById" resultType="Employee">
         SELECT *
         FROM employee
         <where>
