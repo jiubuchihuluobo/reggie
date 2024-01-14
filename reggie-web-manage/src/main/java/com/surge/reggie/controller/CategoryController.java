@@ -42,4 +42,10 @@ public class CategoryController {
         return Response.success(categoryService.delete(id));
     }
 
+    @GetMapping("/list")
+    public Response<Object> categoryDropDown(@RequestParam int type) {
+        return Response.success(categoryService.categoryDropDown(type));
+    }
+
+
 }

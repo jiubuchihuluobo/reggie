@@ -1,6 +1,7 @@
 package com.surge.mapper;
 
 import com.surge.reggie.domain.Category;
+import com.surge.reggie.domain.CategoryDropDownVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface CategoryMapper {
     Category findById(Long id);
 
     int delete(Long id);
+
+    List<CategoryDropDownVo> findCategoryByType(int type);
 
 }

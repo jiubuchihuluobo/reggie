@@ -9,7 +9,7 @@
         <result property="price" column="dish_price"/>
         <result property="image" column="dish_image"/>
         <result property="description" column="dish_description"/>
-        <result property="categoryName" column="category_name"/>
+        <result property="categoryId" column="category_id"/>
         <collection property="flavors" ofType="DishFlavorVo">
             <id property="id" column="flavor_id"/>
             <result property="name" column="flavor_name"/>
@@ -47,7 +47,7 @@
                dish.price        AS dish_price,
                dish.image        AS dish_image,
                dish.description  AS dish_description,
-               category.name     AS category_name,
+               category.id       AS category_id,
                dish_flavor.id    AS flavor_id,
                dish_flavor.name  AS flavor_name,
                dish_flavor.value AS flavor_value

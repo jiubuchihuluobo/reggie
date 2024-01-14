@@ -42,7 +42,14 @@
 
     <delete id="delete">
         DELETE
-        FROM employee
+        FROM category
         WHERE id = #{id}
     </delete>
+    
+    <select id="findCategoryByType" resultType="CategoryDropDownVo">
+        SELECT id   AS id,
+               name AS name
+        FROM category
+        WHERE type = #{type}
+    </select>
 </mapper>

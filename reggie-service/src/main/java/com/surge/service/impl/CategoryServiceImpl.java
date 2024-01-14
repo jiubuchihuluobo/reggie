@@ -3,6 +3,7 @@ package com.surge.service.impl;
 import com.surge.common.SnowFlakeUtil;
 import com.surge.mapper.CategoryMapper;
 import com.surge.reggie.domain.Category;
+import com.surge.reggie.domain.CategoryDropDownVo;
 import com.surge.reggie.domain.Employee;
 import com.surge.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,10 @@ public class CategoryServiceImpl implements CategoryService {
     public int delete(Long id) {
         return categoryMapper.delete(id);
     }
+
+    @Override
+    public List<CategoryDropDownVo> categoryDropDown(int type) {
+        return categoryMapper.findCategoryByType(type);
+    }
+
 }
