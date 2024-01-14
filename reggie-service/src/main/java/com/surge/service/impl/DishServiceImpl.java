@@ -22,7 +22,7 @@ public class DishServiceImpl implements DishService {
     public PageInfo<DishWithCategoryVo> DishManagementList(int page, int pageSize, String name) {
         Page<DishWithCategoryVo> dishPage = PageHelper.startPage(page, pageSize);
         dishMapper.find(name);
-        return new PageInfo<>(dishPage, dishPage.getTotal());
+        return new PageInfo<>(dishPage, (int) dishPage.getTotal());
     }
 
     @Override

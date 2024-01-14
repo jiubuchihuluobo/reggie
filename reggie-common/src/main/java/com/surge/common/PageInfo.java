@@ -9,9 +9,9 @@ public class PageInfo<T> {
 
     private List<T> records;
 
-    private Long total;
+    private int total;
 
-    public PageInfo(List<T> dishList, Long total) {
+    public PageInfo(List<T> dishList, int total) {
         this.records = dishList;
         this.total = total;
     }
