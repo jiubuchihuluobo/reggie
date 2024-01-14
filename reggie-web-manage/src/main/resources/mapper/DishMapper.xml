@@ -60,4 +60,53 @@
             </if>
         </where>
     </select>
+
+    <insert id="insert" parameterType="Dish">
+        INSERT INTO dish(id, name, category_id, price, code, image, description, create_time, update_time, create_user, update_user)
+        VALUES (#{id}, #{name}, #{categoryId}, #{price}, #{code}, #{imgae}, #{description}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+
+    <update id="update" parameterType="Dish">
+        UPDATE dish
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+        </where>
+    </update>
 </mapper>

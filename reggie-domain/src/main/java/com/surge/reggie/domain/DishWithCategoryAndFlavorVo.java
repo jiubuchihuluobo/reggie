@@ -18,7 +18,7 @@ public class DishWithCategoryAndFlavorVo {
 
     private String description;
 
-    private String categoryId;
+    private Long categoryId;
 
     private List<DishFlavorVo> flavors;
 
