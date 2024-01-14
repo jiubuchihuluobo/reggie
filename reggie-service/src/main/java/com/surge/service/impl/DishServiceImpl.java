@@ -1,6 +1,5 @@
 package com.surge.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.surge.common.PageInfo;
@@ -75,7 +74,7 @@ public class DishServiceImpl implements DishService {
         List<DishFlavor> dishFlavorList = new ArrayList<>();
         for (DishFlavorVo dishFlavorVo : dishWithCategoryAndFlavorVo.getFlavors()) {
             DishFlavor dishFlavor = new DishFlavor();
-            BeanUtil.copyProperties(dishFlavorVo, dishFlavor);
+            BeanUtils.copyProperties(dishFlavorVo, dishFlavor);
             dishFlavorList.add(dishFlavor);
         }
         dishFlavorService.updateDishFlavor(dishFlavorList, dish, updateUser);
