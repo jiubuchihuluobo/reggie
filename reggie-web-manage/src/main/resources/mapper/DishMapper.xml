@@ -31,6 +31,7 @@
                dish.create_user,
                dish.update_user,
                dish.is_deleted,
+               category.id   AS category_id,
                category.name AS category_name
         FROM dish
                  INNER JOIN category ON dish.category_id = category.id
@@ -63,7 +64,7 @@
 
     <insert id="insert" parameterType="Dish">
         INSERT INTO dish(id, name, category_id, price, code, image, description, create_time, update_time, create_user, update_user)
-        VALUES (#{id}, #{name}, #{categoryId}, #{price}, #{code}, #{imgae}, #{description}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+        VALUES (#{id}, #{name}, #{categoryId}, #{price}, #{code}, #{image}, #{description}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
 
     <update id="update" parameterType="Dish">

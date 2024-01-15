@@ -36,4 +36,10 @@ public class DishController {
         return Response.success(dishService.modifyDish(dishWithCategoryAndFlavorVo, employee));
     }
 
+    @PostMapping
+    public Response<Object> addDish(@RequestBody DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo) {
+        Employee employee = employeeService.getCurrentUser();
+        return Response.success(dishService.addDish(dishWithCategoryAndFlavorVo, employee));
+    }
+
 }

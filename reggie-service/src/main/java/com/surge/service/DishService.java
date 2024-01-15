@@ -16,7 +16,7 @@ public interface DishService {
 
     int updateDish(Dish dish, Employee updateUser);
 
-    DishWithCategoryAndFlavorVo addDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo);
+    int addDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo, Employee crateUser);
 
     int modifyDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo, Employee updateUser);
 

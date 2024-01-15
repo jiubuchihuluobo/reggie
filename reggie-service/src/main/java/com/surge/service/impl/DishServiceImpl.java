@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class DishServiceImpl implements DishService {
@@ -46,6 +47,7 @@ public class DishServiceImpl implements DishService {
         dish.setUpdateTime(new Date());
         dish.setCreateUser(createUser.getId());
         dish.setUpdateUser(createUser.getId());
+        dish.setCode(UUID.randomUUID().toString().replace("-", ""));
         return dishMapper.insert(dish);
     }
 
@@ -53,20 +55,28 @@ public class DishServiceImpl implements DishService {
     public int updateDish(Dish dish, Employee updateUser) {
         dish.setUpdateUser(updateUser.getId());
         dish.setUpdateTime(updateUser.getUpdateTime());
-        // TODO 临时策略
-
-
         return dishMapper.update(dish);
     }
 
     @Override
-    public DishWithCategoryAndFlavorVo addDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo) {
-        return null;
+    public int addDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo, Employee createUser) {
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishWithCategoryAndFlavorVo, dish);
+        int numberOfRows = insertDish(dish, createUser);
+
+        List<DishFlavor> dishFlavorList = new ArrayList<>();
+        for (DishFlavorVo dishFlavorVo : dishWithCategoryAndFlavorVo.getFlavors()) {
+            DishFlavor dishFlavor = new DishFlavor();
+            BeanUtils.copyProperties(dishFlavorVo, dishFlavor);
+            dishFlavorList.add(dishFlavor);
+        }
+
+        dishFlavorService.insertDishFlavor(dishFlavorList, dish, createUser);
+        return numberOfRows;
     }
 
     @Override
     public int modifyDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo, Employee updateUser) {
-
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishWithCategoryAndFlavorVo, dish);
         int numberOfRows = updateDish(dish, updateUser);
@@ -77,8 +87,8 @@ public class DishServiceImpl implements DishService {
             BeanUtils.copyProperties(dishFlavorVo, dishFlavor);
             dishFlavorList.add(dishFlavor);
         }
-        dishFlavorService.updateDishFlavor(dishFlavorList, dish, updateUser);
 
+        dishFlavorService.updateDishFlavor(dishFlavorList, dish, updateUser);
         return numberOfRows;
     }
 
