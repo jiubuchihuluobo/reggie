@@ -53,7 +53,7 @@
                dish_flavor.value AS flavor_value
         FROM dish
                  INNER JOIN category ON dish.category_id = category.id
-                 INNER JOIN dish_flavor ON dish.id = dish_flavor.dish_id
+                 LEFT JOIN dish_flavor ON dish.id = dish_flavor.dish_id
         <where>
             <if test="id != null">
                 AND dish.id = #{id}
