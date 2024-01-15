@@ -92,5 +92,31 @@ public class DishServiceImpl implements DishService {
         return numberOfRows;
     }
 
+    @Override
+    public int batchEnable(Long[] ids) {
+        int rowOfNumber = 0;
+        Dish dish = new Dish();
+        for (Long id : ids) {
+            dish.setId(id);
+            dish.setStatus(1);
+            dishMapper.update(dish);
+            rowOfNumber++;
+        }
+        return rowOfNumber;
+    }
+
+    @Override
+    public int batchDisable(Long[] ids) {
+        int rowOfNumber = 0;
+        Dish dish = new Dish();
+        for (Long id : ids) {
+            dish.setId(id);
+            dish.setStatus(0);
+            dishMapper.update(dish);
+            rowOfNumber++;
+        }
+        return rowOfNumber;
+    }
+
 }
 

@@ -20,4 +20,8 @@ public interface DishService {
 
     int modifyDish(DishWithCategoryAndFlavorVo dishWithCategoryAndFlavorVo, Employee updateUser);
 
+    int batchEnable(Long[] ids);
+
+    int batchDisable(Long[] ids);
+
 }

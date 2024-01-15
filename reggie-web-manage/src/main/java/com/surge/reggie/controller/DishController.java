@@ -42,4 +42,14 @@ public class DishController {
         return Response.success(dishService.addDish(dishWithCategoryAndFlavorVo, employee));
     }
 
+    @PostMapping("/status/{status}")
+    public Response<Object> batchEnableOrDisable(@PathVariable int status, @RequestParam Long[] ids) {
+        int rowOfNumber = switch (status) {
+            case 0 -> dishService.batchDisable(ids);
+            case 1 -> dishService.batchEnable(ids);
+            default -> 0;
+        };
+        return Response.success(rowOfNumber);
+    }
+
 }
