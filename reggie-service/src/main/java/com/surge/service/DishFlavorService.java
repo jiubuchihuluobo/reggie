@@ -12,4 +12,8 @@ public interface DishFlavorService {
 
     int updateDishFlavor(List<DishFlavor> dishFlavorList, Dish dish, Employee createUser);
 
+    int delete(Long dish_id);
+
+    List<DishFlavor> findIdByDishId(Dish dish);
+
 }

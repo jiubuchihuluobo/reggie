@@ -24,4 +24,6 @@ public interface DishService {
 
     int batchDisable(Long[] ids);
 
+    int delete(Long[] ids, Employee updateUser);
+
 }

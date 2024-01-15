@@ -39,6 +39,7 @@
             <if test="name != '' and name != null">
                 AND dish.name = #{name}
             </if>
+            AND dish.is_deleted = 0
         </where>
     </select>
 
@@ -59,6 +60,7 @@
             <if test="id != null">
                 AND dish.id = #{id}
             </if>
+            AND dish.is_deleted = 0
         </where>
     </select>
 

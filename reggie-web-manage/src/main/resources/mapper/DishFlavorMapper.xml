@@ -34,6 +34,15 @@
             <if test="id != null">
                 AND id = #{id}
             </if>
+            <if test="dishId != null">
+                AND dish_id = #{dishId}
+            </if>
         </where>
     </update>
+
+    <select id="findIdByDishId" resultType="DishFlavor">
+        SELECT id
+        FROM dish_flavor
+        WHERE dish_id = #{id}
+    </select>
 </mapper>

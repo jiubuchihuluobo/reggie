@@ -52,4 +52,10 @@ public class DishController {
         return Response.success(rowOfNumber);
     }
 
+    @DeleteMapping
+    public Response<Object> delete(@RequestParam Long[] ids) {
+        Employee employee = employeeService.getCurrentUser();
+        return Response.success(dishService.delete(ids, employee));
+    }
+
 }

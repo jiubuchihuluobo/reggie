@@ -118,5 +118,25 @@ public class DishServiceImpl implements DishService {
         return rowOfNumber;
     }
 
+    @Override
+    public int delete(Long[] ids, Employee updateUser) {
+        int rowOfNumber = 0;
+
+        for (Long id : ids) {
+            Dish dish = new Dish();
+            dish.setId(id);
+            dish.setIsDeleted(1);
+            rowOfNumber = updateDish(dish, updateUser);
+
+            List<DishFlavor> dishFlavorList = dishFlavorService.findIdByDishId(dish);
+            for (DishFlavor dishFlavor : dishFlavorList) {
+                dishFlavor.setIsDeleted(1);
+            }
+            dishFlavorService.updateDishFlavor(dishFlavorList, dish, updateUser);
+        }
+
+        return rowOfNumber;
+    }
+
 }
 

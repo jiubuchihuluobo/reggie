@@ -45,4 +45,14 @@ public class DishFlavorServiceImpl implements DishFlavorService {
         return i;
     }
 
+    @Override
+    public int delete(Long dish_id) {
+        return 0;
+    }
+
+    @Override
+    public List<DishFlavor> findIdByDishId(Dish dish) {
+        return dishFlavorMapper.findIdByDishId(dish);
+    }
+
 }

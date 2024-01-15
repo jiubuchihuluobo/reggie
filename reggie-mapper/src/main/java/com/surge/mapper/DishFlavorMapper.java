@@ -1,5 +1,6 @@
 package com.surge.mapper;
 
+import com.surge.reggie.domain.Dish;
 import com.surge.reggie.domain.DishFlavor;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,5 +12,7 @@ public interface DishFlavorMapper {
     int insert(List<DishFlavor> dishFlavorList);
 
     int update(DishFlavor dishFlavor);
+
+    List<DishFlavor> findIdByDishId(Dish dish);
 
 }
