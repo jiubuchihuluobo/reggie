@@ -16,4 +16,6 @@ public interface SetMealMapper {
 
     List<SetMeal> find(String name);
 
+    SetMeal findSetMealWithDishById(Long id);
+
 }

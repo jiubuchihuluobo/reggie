@@ -2,10 +2,7 @@ package com.surge.reggie.controller;
 
 import com.surge.common.Response;
 import com.surge.service.SetMealService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/setmeal")
@@ -19,6 +16,11 @@ public class SetMealController {
     @GetMapping("/page")
     public Response<Object> setMealList(@RequestParam int page, @RequestParam int pageSize, @RequestParam(required = false) String name) {
         return Response.success(setMealService.setMealList(page, pageSize, name));
+    }
+
+    @GetMapping("/{id}")
+    public Response<Object> findSetMealWithDishById(@PathVariable Long id) {
+        return Response.success(setMealService.findSetMealWithDishById(id));
     }
 
 }

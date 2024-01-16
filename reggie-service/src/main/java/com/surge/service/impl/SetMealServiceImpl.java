@@ -6,6 +6,7 @@ import com.surge.common.PageData;
 import com.surge.mapper.SetMealMapper;
 import com.surge.reggie.domain.SetMeal;
 import com.surge.reggie.domain.SetMealListVo;
+import com.surge.reggie.domain.SetMealModifyVo;
 import com.surge.service.SetMealService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,14 @@ public class SetMealServiceImpl implements SetMealService {
                     .collect(Collectors.toList());
             return new PageData<>(setMealListVoList, (int) setMealPage.getTotal());
         }
+    }
+
+    @Override
+    public SetMealModifyVo findSetMealWithDishById(Long id) {
+        SetMeal setMeal = setMealMapper.findSetMealWithDishById(id);
+        SetMealModifyVo setMealModifyVo = new SetMealModifyVo();
+        BeanUtils.copyProperties(setMeal, setMealModifyVo);
+        return setMealModifyVo;
     }
 
 }

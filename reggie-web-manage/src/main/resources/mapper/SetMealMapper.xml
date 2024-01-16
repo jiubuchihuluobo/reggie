@@ -85,4 +85,20 @@
                  INNER JOIN category ON setmeal.category_id = category.id
         WHERE setmeal.is_deleted != 1
     </select>
+
+    <select id="findSetMealWithDishById" resultType="SetMeal">
+        SELECT setmeal.id          AS id,
+               setmeal.name        AS name,
+               setmeal.price       AS price,
+               setmeal.status      AS status,
+               setmeal.image       AS image,
+               setmeal.update_time AS updateTime,
+               category.id         AS categoryId,
+               dish.name           AS dishName
+        FROM setmeal
+                 INNER JOIN setmeal_dish ON setmeal.id = setmeal_dish.setmeal_id
+                 INNER JOIN dish ON dish.id = setmeal_dish.dish_id
+                 INNER JOIN category ON setmeal.category_id = category.id
+        WHERE setmeal.is_deleted != 1
+    </select>
 </mapper>
