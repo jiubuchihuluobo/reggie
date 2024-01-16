@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class DishServiceImpl implements DishService {
@@ -136,6 +137,18 @@ public class DishServiceImpl implements DishService {
         }
 
         return rowOfNumber;
+    }
+
+    @Override
+    public List<DishListVo> findDishList(Long id) {
+        List<Dish> dishList = dishMapper.findDishListById(id);
+        return dishList.parallelStream()
+                .map(dish -> {
+                    DishListVo dishListVo = new DishListVo();
+                    BeanUtils.copyProperties(dish, dishListVo);
+                    return dishListVo;
+                })
+                .collect(Collectors.toList());
     }
 
 }

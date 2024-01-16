@@ -18,4 +18,6 @@ public interface DishMapper {
 
     int update(Dish dish);
 
+    List<Dish> findDishListById(Long id);
+
 }

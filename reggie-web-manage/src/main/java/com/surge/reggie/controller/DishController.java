@@ -58,4 +58,9 @@ public class DishController {
         return Response.success(dishService.delete(ids, employee));
     }
 
+    @GetMapping("/list")
+    public Response<Object> findByDishList(@RequestParam("categoryId") Long id) {
+        return Response.success(dishService.findDishList(id));
+    }
+
 }

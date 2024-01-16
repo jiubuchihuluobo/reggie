@@ -1,10 +1,9 @@
 package com.surge.service;
 
 import com.surge.common.PageData;
-import com.surge.reggie.domain.Dish;
-import com.surge.reggie.domain.DishWithCategoryAndFlavorVo;
-import com.surge.reggie.domain.DishWithCategoryVo;
-import com.surge.reggie.domain.Employee;
+import com.surge.reggie.domain.*;
+
+import java.util.List;
 
 public interface DishService {
 
@@ -25,5 +24,7 @@ public interface DishService {
     int batchDisable(Long[] ids);
 
     int delete(Long[] ids, Employee updateUser);
+
+    List<DishListVo> findDishList(Long id);
 
 }
