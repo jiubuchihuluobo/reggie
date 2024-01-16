@@ -23,9 +23,9 @@ public class SetMealServiceImpl implements SetMealService {
     }
 
     @Override
-    public PageData<SetMealListVo> setMealList(int page, int pageSize) {
+    public PageData<SetMealListVo> setMealList(int page, int pageSize, String name) {
         try (Page<SetMeal> setMealPage = PageHelper.startPage(page, pageSize)) {
-            setMealMapper.findAll();
+            setMealMapper.find(name);
             List<SetMealListVo> setMealListVoList = setMealPage.getResult().parallelStream()
                     .map(setMeal -> {
                         SetMealListVo setMealListVo = new SetMealListVo();
@@ -35,11 +35,6 @@ public class SetMealServiceImpl implements SetMealService {
                     .collect(Collectors.toList());
             return new PageData<>(setMealListVoList, (int) setMealPage.getTotal());
         }
-    }
-
-    @Override
-    public SetMeal findByName(String name) {
-        return setMealMapper.findByName(name);
     }
 
 }

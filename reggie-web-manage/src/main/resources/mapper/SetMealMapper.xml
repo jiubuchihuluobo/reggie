@@ -53,8 +53,8 @@
           AND setmeal.id = #{id}
     </select>
 
-    <!-- 根据ID查询套餐 -->
-    <select id="findByName" resultType="SetMeal">
+    <!-- 通用查询 -->
+    <select id="find" resultType="SetMeal">
         SELECT setmeal.id          AS id,
                setmeal.name        AS name,
                setmeal.price       AS price,
@@ -64,8 +64,12 @@
                category.name       AS categoryName
         FROM setmeal
                  INNER JOIN category ON setmeal.category_id = category.id
-        WHERE setmeal.is_deleted != 1
-          AND setmeal.name = #{name}
+        <where>
+            <if test="name != null and name != ''">
+                AND setmeal.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            AND setmeal.is_deleted = 0
+        </where>
     </select>
 
     <!-- 查询所有套餐 -->

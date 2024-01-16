@@ -17,8 +17,8 @@ public class SetMealController {
     }
 
     @GetMapping("/page")
-    public Response<Object> setMealList(@RequestParam int page, @RequestParam int pageSize) {
-        return Response.success(setMealService.setMealList(page, pageSize));
+    public Response<Object> setMealList(@RequestParam int page, @RequestParam int pageSize, @RequestParam(required = false) String name) {
+        return Response.success(setMealService.setMealList(page, pageSize, name));
     }
 
 }
