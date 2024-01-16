@@ -5,13 +5,13 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PageInfo<T> {
+public class PageData<T> {
 
     private List<T> records;
 
     private int total;
 
-    public PageInfo(List<T> dishList, int total) {
+    public PageData(List<T> dishList, int total) {
         this.records = dishList;
         this.total = total;
     }

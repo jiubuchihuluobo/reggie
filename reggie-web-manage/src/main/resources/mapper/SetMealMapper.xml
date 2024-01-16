@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.mapper.SetMealMapper">
+    <!-- 插入套餐 -->
+    <insert id="insert" parameterType="SetMeal">
+        INSERT INTO setmeal (id, category_id, name, price, status, code,
+                             description, image, create_time, update_time,
+                             create_user, update_user, is_deleted)
+        VALUES (#{id}, #{categoryId}, #{name}, #{price}, #{status}, #{code},
+                #{description}, #{image}, #{createTime}, #{updateTime},
+                #{createUser}, #{updateUser}, #{isDeleted})
+    </insert>
+
+    <!-- 根据ID删除套餐 -->
+    <delete id="deleteById">
+        DELETE
+        FROM setmeal
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 更新套餐信息 -->
+    <update id="update" parameterType="SetMeal">
+        UPDATE setmeal
+        SET category_id = #{categoryId},
+            name        = #{name},
+            price       = #{price},
+            status      = #{status},
+            code        = #{code},
+            description = #{description},
+            image       = #{image},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            create_user = #{createUser},
+            update_user = #{updateUser},
+            is_deleted  = #{isDeleted}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询套餐 -->
+    <select id="findById" resultType="SetMeal">
+        SELECT setmeal.id          AS id,
+               setmeal.name        AS name,
+               setmeal.price       AS price,
+               setmeal.status      AS status,
+               setmeal.image       AS image,
+               setmeal.update_time AS updateTime,
+               category.name       AS categoryName
+        FROM setmeal
+                 INNER JOIN category ON setmeal.category_id = category.id
+        WHERE setmeal.is_deleted != 1
+          AND setmeal.id = #{id}
+    </select>
+
+    <!-- 根据ID查询套餐 -->
+    <select id="findByName" resultType="SetMeal">
+        SELECT setmeal.id          AS id,
+               setmeal.name        AS name,
+               setmeal.price       AS price,
+               setmeal.status      AS status,
+               setmeal.image       AS image,
+               setmeal.update_time AS updateTime,
+               category.name       AS categoryName
+        FROM setmeal
+                 INNER JOIN category ON setmeal.category_id = category.id
+        WHERE setmeal.is_deleted != 1
+          AND setmeal.name = #{name}
+    </select>
+
+    <!-- 查询所有套餐 -->
+    <select id="findAll" resultType="SetMeal">
+        SELECT setmeal.id          AS id,
+               setmeal.name        AS name,
+               setmeal.price       AS price,
+               setmeal.status      AS status,
+               setmeal.image       AS image,
+               setmeal.update_time AS updateTime,
+               category.name       AS categoryName
+        FROM setmeal
+                 INNER JOIN category ON setmeal.category_id = category.id
+        WHERE setmeal.is_deleted != 1
+    </select>
+</mapper>

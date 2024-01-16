@@ -2,7 +2,7 @@ package com.surge.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.surge.common.PageInfo;
+import com.surge.common.PageData;
 import com.surge.common.SnowFlakeUtil;
 import com.surge.mapper.DishMapper;
 import com.surge.reggie.domain.*;
@@ -29,10 +29,10 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public PageInfo<DishWithCategoryVo> DishManagementList(int page, int pageSize, String name) {
+    public PageData<DishWithCategoryVo> DishManagementList(int page, int pageSize, String name) {
         Page<DishWithCategoryVo> dishPage = PageHelper.startPage(page, pageSize);
         dishMapper.find(name);
-        return new PageInfo<>(dishPage, (int) dishPage.getTotal());
+        return new PageData<>(dishPage, (int) dishPage.getTotal());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.surge.service;
 
-import com.surge.common.PageInfo;
+import com.surge.common.PageData;
 import com.surge.reggie.domain.Dish;
 import com.surge.reggie.domain.DishWithCategoryAndFlavorVo;
 import com.surge.reggie.domain.DishWithCategoryVo;
@@ -8,7 +8,7 @@ import com.surge.reggie.domain.Employee;
 
 public interface DishService {
 
-    PageInfo<DishWithCategoryVo> DishManagementList(int page, int pageSize, String name);
+    PageData<DishWithCategoryVo> DishManagementList(int page, int pageSize, String name);
 
     DishWithCategoryAndFlavorVo findDish(Long id);
 
