@@ -3,13 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.surge.mapper.SetMealMapper">
+    <resultMap id="SetMealMap" type="SetMeal">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="image" column="image"/>
+        <result property="description" column="description"/>
+        <result property="categoryId" column="category_id"/>
+        <collection property="setmealDishes" ofType="Dish">
+            <id property="id" column="dish_id"/>
+            <result property="name" column="dish_name"/>
+            <result property="price" column="dish_price"/>
+            <result property="copies" column="copies"/>
+        </collection>
+    </resultMap>
+
     <!-- 插入套餐 -->
     <insert id="insert" parameterType="SetMeal">
         INSERT INTO setmeal (id, category_id, name, price, status, code,
                              description, image, create_time, update_time,
                              create_user, update_user, is_deleted)
         VALUES (#{id}, #{categoryId}, #{name}, #{price}, #{status}, #{code},
-                #{description}, #{image}, #{createTime}, #{updateTime},
+                #{description}, #{image}, #{createTime}, #{update_time},
                 #{createUser}, #{updateUser}, #{isDeleted})
     </insert>
 
@@ -31,7 +46,7 @@
             description = #{description},
             image       = #{image},
             create_time = #{createTime},
-            update_time = #{updateTime},
+            update_time = #{update_time},
             create_user = #{createUser},
             update_user = #{updateUser},
             is_deleted  = #{isDeleted}
@@ -45,8 +60,8 @@
                setmeal.price       AS price,
                setmeal.status      AS status,
                setmeal.image       AS image,
-               setmeal.update_time AS updateTime,
-               category.name       AS categoryName
+               setmeal.update_time AS update_time,
+               category.name       AS category_name
         FROM setmeal
                  INNER JOIN category ON setmeal.category_id = category.id
         WHERE setmeal.is_deleted != 1
@@ -60,8 +75,8 @@
                setmeal.price       AS price,
                setmeal.status      AS status,
                setmeal.image       AS image,
-               setmeal.update_time AS updateTime,
-               category.name       AS categoryName
+               setmeal.update_time AS update_time,
+               category.name       AS category_name
         FROM setmeal
                  INNER JOIN category ON setmeal.category_id = category.id
         <where>
@@ -79,26 +94,35 @@
                setmeal.price       AS price,
                setmeal.status      AS status,
                setmeal.image       AS image,
-               setmeal.update_time AS updateTime,
-               category.name       AS categoryName
+               setmeal.update_time AS update_time,
+               category.name       AS category_name
         FROM setmeal
                  INNER JOIN category ON setmeal.category_id = category.id
         WHERE setmeal.is_deleted != 1
     </select>
 
-    <select id="findSetMealWithDishById" resultType="SetMeal">
+    <select id="findSetMealWithDishById" resultMap="SetMealMap">
         SELECT setmeal.id          AS id,
                setmeal.name        AS name,
                setmeal.price       AS price,
                setmeal.status      AS status,
                setmeal.image       AS image,
-               setmeal.update_time AS updateTime,
-               category.id         AS categoryId,
-               dish.name           AS dishName
+               setmeal.update_time AS update_time,
+               category.id         AS category_id,
+               dish.id             AS dish_id,
+               dish.name           AS dish_name,
+               dish.price          AS dish_price,
+               COUNT(*)            AS copies
         FROM setmeal
                  INNER JOIN setmeal_dish ON setmeal.id = setmeal_dish.setmeal_id
                  INNER JOIN dish ON dish.id = setmeal_dish.dish_id
                  INNER JOIN category ON setmeal.category_id = category.id
-        WHERE setmeal.is_deleted != 1
+        <where>
+            <if test="id != null">
+                AND setmeal.id = #{id}
+            </if>
+            AND setmeal.is_deleted = 0
+        </where>
+        GROUP BY setmeal.id, setmeal.name, setmeal.price, setmeal.status, setmeal.image, setmeal.update_time, category.id, dish.id, dish.name, dish.price
     </select>
 </mapper>

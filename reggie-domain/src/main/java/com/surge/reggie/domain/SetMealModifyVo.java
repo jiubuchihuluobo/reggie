@@ -12,8 +12,7 @@ public class SetMealModifyVo {
     private String name;
     private BigDecimal price;
     private Integer status;
-    private String code;
     private String description;
     private String image;
-    private List<Dish> dishList;
+    private List<DishModifyVo> setmealDishes;
 }

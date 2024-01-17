@@ -22,5 +22,5 @@ public class SetMeal {
     private Long createUser;
     private Long updateUser;
     private Integer isDeleted;
-    private List<Dish> dishList;
+    private List<DishModifyVo> setmealDishes;
 }
