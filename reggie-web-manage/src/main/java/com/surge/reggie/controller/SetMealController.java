@@ -35,4 +35,10 @@ public class SetMealController {
         return Response.success(setMealService.modifySetMeal(setMealModifyVo, employee));
     }
 
+    @PostMapping
+    public Response<Object> addSetMeal(@RequestBody SetMealModifyVo setMealModifyVo) {
+        Employee employee = employeeService.getCurrentUser();
+        return Response.success(setMealService.addSetMeal(setMealModifyVo, employee));
+    }
+
 }

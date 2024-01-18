@@ -3,6 +3,7 @@ package com.surge.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.surge.common.PageData;
+import com.surge.common.SnowFlakeUtil;
 import com.surge.mapper.DishMapper;
 import com.surge.mapper.SetMealMapper;
 import com.surge.reggie.domain.*;
@@ -57,7 +58,12 @@ public class SetMealServiceImpl implements SetMealService {
 
     @Override
     public int insert(SetMeal setMeal, Employee createUser) {
-        return 0;
+        setMeal.setId(SnowFlakeUtil.getId());
+        setMeal.setCreateUser(createUser.getId());
+        setMeal.setCreateTime(new Date());
+        setMeal.setUpdateUser(createUser.getId());
+        setMeal.setUpdateTime(new Date());
+        return setMealMapper.insert(setMeal);
     }
 
     @Override
@@ -68,12 +74,30 @@ public class SetMealServiceImpl implements SetMealService {
     }
 
     @Override
-    public int addSetMeal(SetMealModifyVo setMealModifyVo, Employee crateUser) {
-        return 0;
+    @Transactional(rollbackFor = Exception.class)
+    public int addSetMeal(SetMealModifyVo setMealModifyVo, Employee createUser) {
+        SetMeal setMeal = new SetMeal();
+        BeanUtils.copyProperties(setMealModifyVo, setMeal);
+        int rowOfNumber = insert(setMeal, createUser);
+
+        List<SetMealDish> setMealDishes = setMealModifyVo.getSetmealDishes().parallelStream()
+                .map(dishModifyVo -> {
+                    SetMealDish setMealDish = new SetMealDish();
+                    BeanUtils.copyProperties(dishModifyVo, setMealDish);
+                    setMealDish.setSetmealId(setMeal.getId().toString());
+                    setMealDish.setDishId(dishService.findIdByName(setMealDish.getName()).getId().toString());
+                    return setMealDish;
+                })
+                .toList();
+
+        setMealDishService.delete(setMeal.getId());
+
+        setMealDishService.insert(setMealDishes, createUser);
+        return rowOfNumber;
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int modifySetMeal(SetMealModifyVo setMealModifyVo, Employee updateUser) {
         SetMeal setMeal = new SetMeal();
         BeanUtils.copyProperties(setMealModifyVo, setMeal);
