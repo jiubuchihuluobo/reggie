@@ -151,5 +151,10 @@ public class DishServiceImpl implements DishService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Dish findIdByName(String name) {
+        return dishMapper.findIdByName(name);
+    }
+
 }
 

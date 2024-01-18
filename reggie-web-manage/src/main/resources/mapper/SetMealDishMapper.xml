@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surge.mapper.SetMealDishMapper">
+    <insert id="insert" parameterType="java.util.List">
+        INSERT INTO setmeal_dish(id, setmeal_id, dish_id, name, price, copies, create_time, update_time, create_user, update_user)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.setmealId}, #{item.dishId}, #{item.name}, #{item.price}, #{item.copies}, #{item.createTime}, #{item.updateTime}, #{item.createUser}, #{item.updateUser})
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="SetMealDish">
+        UPDATE setmeal_dish
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="price != null and price != ''">
+                price = #{price},
+            </if>
+            <if test="copies != null">
+                copies = #{copies},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            setmeal_id = #{setmealId},
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBySetMealId">
+        DELETE
+        FROM setmeal_dish
+        WHERE setmeal_id = #{setmealId}
+    </delete>
+</mapper>

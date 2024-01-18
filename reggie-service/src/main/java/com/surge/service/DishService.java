@@ -27,4 +27,6 @@ public interface DishService {
 
     List<DishListVo> findDishList(Long id);
 
+    Dish findIdByName(String name);
+
 }
